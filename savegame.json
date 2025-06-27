@@ -1,0 +1,139 @@
+{
+    "player": {
+        "current_room": "locked_room",
+        "inventory": [
+            "stick",
+            "health potion",
+            "treasure"
+        ],
+        "health": 100,
+        "coins": 10,
+        "equipped_weapon": "stick"
+    },
+    "rooms": {
+        "peak": {
+            "description": "You are standing on a snowy peak. The air is thin and cold.",
+            "exits": {
+                "down": "mountain_pass"
+            },
+            "items": []
+        },
+        "mountain_pass": {
+            "description": "A narrow pass between steep mountains.",
+            "exits": {
+                "up": "peak",
+                "down": "cliffside"
+            },
+            "items": []
+        },
+        "cliffside": {
+            "description": "A precarious cliffside with a breathtaking view.",
+            "exits": {
+                "up": "mountain_pass",
+                "down": "forest_center"
+            },
+            "items": []
+        },
+        "forest_center": {
+            "description": "A dense forest with tall trees all around.",
+            "exits": {
+                "up": "cliffside",
+                "west": "cave",
+                "east": "river",
+                "down": "village",
+                "south": "bridge"
+            },
+            "items": []
+        },
+        "cave": {
+            "description": "A dark cave echoing with mysterious sounds.",
+            "exits": {
+                "east": "forest_center"
+            },
+            "items": []
+        },
+        "river": {
+            "description": "A flowing river with clear, cold water.",
+            "exits": {
+                "west": "forest_center",
+                "east": "mill",
+                "south": "forest_center"
+            },
+            "items": []
+        },
+        "bridge": {
+            "description": "A wooden bridge crossing a deep gorge.",
+            "exits": {
+                "north": "forest_center",
+                "south": "locked_room"
+            },
+            "items": []
+        },
+        "locked_room": {
+            "description": "The treasure room, locked tight behind a heavy gate.",
+            "exits": {
+                "north": "bridge"
+            },
+            "items": [],
+            "locked": false
+        },
+        "village": {
+            "description": "A quiet village with a few humble houses.",
+            "exits": {
+                "up": "forest_center",
+                "down": "blacksmith"
+            },
+            "items": []
+        },
+        "blacksmith": {
+            "description": "The blacksmith's workshop, filled with the sound of hammer on anvil.",
+            "exits": {
+                "up": "village"
+            },
+            "items": []
+        },
+        "mill": {
+            "description": "An old mill beside the river, creaking with the wind.",
+            "exits": {
+                "west": "river"
+            },
+            "items": []
+        }
+    },
+    "enemies": [
+        {
+            "name": "Bagh",
+            "location": "forest_center",
+            "patrol_path": [
+                "cave",
+                "river",
+                "forest_center"
+            ],
+            "step": 2,
+            "damage": 20,
+            "health": 40
+        },
+        {
+            "name": "Sarpo",
+            "location": "river",
+            "patrol_path": [
+                "river",
+                "forest_center"
+            ],
+            "step": 0,
+            "damage": 10,
+            "health": 25
+        },
+        {
+            "name": "Chituwa",
+            "location": "river",
+            "patrol_path": [
+                "river",
+                "forest_center"
+            ],
+            "step": 0,
+            "damage": 10,
+            "health": 25
+        }
+    ]
+}

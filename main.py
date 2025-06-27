@@ -13,7 +13,7 @@ with open(WORLD_FILE) as f:
 # Load riddles
 riddles = [
     {"question": "What has keys but can't open locks?", "answer": "keyboard"},
-    {"question": "What has hands but can't clap?", "answer": "clock"},
+    {"question": "I dont need clean place, I stay in dirt. I search food for all night while I hide all day.Who am I?", "answer": "Mosquito"},
     {"question": "What can travel around the world while staying in the same corner?", "answer": "stamp"},
     {"question": "What gets wetter the more it dries?", "answer": "towel"}
 ]
@@ -30,7 +30,7 @@ player = {
 
 # Weapon stats
 weapon_stats = {
-    "stick": 5,
+    "stick": 25,
     "dagger": 10,
     "sword": 15
 }
@@ -55,7 +55,7 @@ def clear_screen():
 
 def save_game():
     with open(SAVE_FILE, "w") as f:
-        json.dump({"player": player, "rooms": rooms, "enemies": enemies}, f)
+        json.dump({"player": player, "rooms": rooms, "enemies": enemies}, f, indent=4)
     print("💾 Game saved!")
 
 def load_game():

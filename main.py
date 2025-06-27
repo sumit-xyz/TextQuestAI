@@ -21,7 +21,7 @@ treasure_riddle = random.choice(riddles)
 
 # Player state
 player = {
-    "current_room": "forest",
+    "current_room": "forest_center",
     "inventory": ["stick", "health potion"],
     "health": 100,
     "coins": 10,
@@ -37,9 +37,9 @@ weapon_stats = {
 
 # Enemies
 enemies = [
-    {"name": "Bagh", "location": "cave", "patrol_path": ["cave", "river", "forest"], "step": 0, "damage": 20, "health": 40},
-    {"name": "Sarpo", "location": "river", "patrol_path": ["river", "forest"], "step": 0, "damage": 10, "health": 25},
-    {"name": "chituwa", "location": "forest", "patrol_path": ["river", "forest"], "step": 0, "damage": 10, "health": 25}
+    {"name": "Bagh", "location": "cave", "patrol_path": ["cave", "river", "forest_center"], "step": 0, "damage": 20, "health": 40},
+    {"name": "Sarpo", "location": "river", "patrol_path": ["river", "forest_center"], "step": 0, "damage": 10, "health": 25},
+    {"name": "Chituwa", "location": "forest_center", "patrol_path": ["river", "forest_center"], "step": 0, "damage": 10, "health": 25}
 ]
 
 # Shop items
@@ -75,7 +75,7 @@ def load_game():
 # --- Display ---
 def show_room():
     room = rooms[player["current_room"]]
-    print(f"\n📍 Location: {player['current_room'].title()}")
+    print(f"\n📍 Location: {player['current_room'].replace('_', ' ').title()}")
     print("-" * 30)
     print(room.get("description", ""))
     if room.get("items"):
@@ -90,20 +90,29 @@ def show_inventory():
     print(f"🪙 Coins: {player['coins']}")
     print(f"🗡️ Equipped: {player['equipped_weapon'] or 'None'}")
 
-def show_map():
+def show_larger_map():
     current = player["current_room"]
+    def highlight(room):
+        return f"👉 [{room.replace('_', ' ').title()}] 👈" if current == room else f"[{room.replace('_', ' ').title()}]"
+
     print("\n🗺️ MAP:")
-    print("    [Cave]" if current != "cave" else " 👉 [Cave] 👈")
-    print("      |")
-    left = "[Forest]" if current != "forest" else "👉 [Forest] 👈"
-    right = "[River]" if current != "river" else "👉 [River] 👈"
-    print(f" {left}  -  {right}")
-    print("      |")
-    bridge = "[Bridge]" if current != "bridge" else "👉 [Bridge] 👈"
-    print(f"    {bridge}")
-    print("      |")
-    locked = "[Treasure Room]" if current != "locked_room" else "👉 [Treasure Room] 👈"
-    print(f"   {locked}")
+
+    print(f"        {highlight('peak')}")
+    print("           |")
+    print(f"   {highlight('mountain_pass')}")
+    print("           |")
+    print(f"        {highlight('cliffside')}")
+    print("           |")
+    print(f"        {highlight('forest_center')}")
+    
+    # Horizontal line
+    print(f"{highlight('cave')} - {highlight('forest_center')} - {highlight('river')} - {highlight('bridge')} - {highlight('locked_room')}")
+
+    # Branches down from forest_center and river
+    print("           |         |")
+    print(f"     {highlight('village')}   {highlight('mill')}")
+    print("           |")
+    print(f"    {highlight('blacksmith')}")
 
 def show_help():
     print("""
@@ -222,6 +231,21 @@ def check_enemies():
         if e["location"] == player["current_room"]:
             print(f"⚠️ {e['name']} is here!")
 
+def enter_shop():
+    print("\n🛒 Shop:")
+    for item, cost in shop_items.items():
+        print(f"- {item}: {cost} coins")
+    choice = input("Buy what? ").strip().lower()
+    if choice in shop_items:
+        if player["coins"] >= shop_items[choice]:
+            player["coins"] -= shop_items[choice]
+            player["inventory"].append(choice)
+            print(f"✅ Bought {choice}")
+        else:
+            print("❌ Not enough coins.")
+    else:
+        print("❌ Not available.")
+
 # --- Game Loop ---
 def game_loop():
     clear_screen()
@@ -240,7 +264,7 @@ def game_loop():
         elif command == "attack": attack()
         elif command == "inventory": show_inventory()
         elif command == "shop": enter_shop()
-        elif command == "map": show_map()
+        elif command == "map": show_larger_map()
         elif command == "save": save_game()
         elif command == "load": load_game()
         elif command == "help": show_help()
@@ -253,21 +277,6 @@ def game_loop():
         move_enemies()
         input("\nPress Enter to continue...")
         clear_screen()
-
-def enter_shop():
-    print("\n🛒 Shop:")
-    for item, cost in shop_items.items():
-        print(f"- {item}: {cost} coins")
-    choice = input("Buy what? ").strip().lower()
-    if choice in shop_items:
-        if player["coins"] >= shop_items[choice]:
-            player["coins"] -= shop_items[choice]
-            player["inventory"].append(choice)
-            print(f"✅ Bought {choice}")
-        else:
-            print("❌ Not enough coins.")
-    else:
-        print("❌ Not available.")
 
 if __name__ == "__main__":
     game_loop()

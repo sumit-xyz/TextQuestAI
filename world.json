@@ -1,41 +1,58 @@
 {
-  "forest": {
-    "description": "You are in a calm forest. The leaves rustle in the wind. Paths lead north and east.",
-    "items": ["stick", "apple", "health potion"],
-    "exits": {
-      "north": "cave",
-      "east": "river",
-      "south": "bridge"
-    }
+  "peak": {
+    "description": "You are standing on a snowy peak. The air is thin and cold.",
+    "exits": {"down": "mountain_pass"},
+    "items": []
+  },
+  "mountain_pass": {
+    "description": "A narrow pass between steep mountains.",
+    "exits": {"up": "peak", "down": "cliffside"},
+    "items": []
+  },
+  "cliffside": {
+    "description": "A precarious cliffside with a breathtaking view.",
+    "exits": {"up": "mountain_pass", "down": "forest_center"},
+    "items": []
+  },
+  "forest_center": {
+    "description": "A dense forest with tall trees all around.",
+    "exits": {"up": "cliffside", "west": "cave", "east": "river", "down": "village", "south": "bridge"},
+    "items": []
   },
   "cave": {
-    "description": "A dark cave with dripping water. You can hear distant growling.",
-    "items": ["sword"],
-    "exits": {
-      "south": "forest"
-    }
+    "description": "A dark cave echoing with mysterious sounds.",
+    "exits": {"east": "forest_center"},
+    "items": []
   },
   "river": {
-    "description": "A river flows swiftly. You see fish and maybe danger lurking.",
-    "items": ["dagger", "coin"],
-    "exits": {
-      "west": "forest"
-    }
+    "description": "A flowing river with clear, cold water.",
+    "exits": {"west": "forest_center", "east": "mill", "south": "forest_center"},
+    "items": []
   },
   "bridge": {
-    "description": "A creaky wooden bridge over a chasm. It leads to a locked gate.",
-    "items": [],
-    "exits": {
-      "north": "forest",
-      "south": "locked_room"
-    }
+    "description": "A wooden bridge crossing a deep gorge.",
+    "exits": {"north": "forest_center", "south": "locked_room"},
+    "items": []
   },
   "locked_room": {
-    "description": "You've entered a hidden chamber with glowing walls. A golden chest sits in the center.",
-    "locked": true,
+    "description": "The treasure room, locked tight behind a heavy gate.",
+    "exits": {"north": "bridge"},
     "items": ["treasure"],
-    "exits": {
-      "west": "bridge"
-    }
+    "locked": true
+  },
+  "village": {
+    "description": "A quiet village with a few humble houses.",
+    "exits": {"up": "forest_center", "down": "blacksmith"},
+    "items": []
+  },
+  "blacksmith": {
+    "description": "The blacksmith's workshop, filled with the sound of hammer on anvil.",
+    "exits": {"up": "village"},
+    "items": []
+  },
+  "mill": {
+    "description": "An old mill beside the river, creaking with the wind.",
+    "exits": {"west": "river"},
+    "items": []
   }
 }

@@ -1,0 +1,41 @@
+{
+  "forest": {
+    "description": "You are in a calm forest. The leaves rustle in the wind. Paths lead north and east.",
+    "items": ["stick", "apple", "health potion"],
+    "exits": {
+      "north": "cave",
+      "east": "river",
+      "south": "bridge"
+    }
+  },
+  "cave": {
+    "description": "A dark cave with dripping water. You can hear distant growling.",
+    "items": ["sword"],
+    "exits": {
+      "south": "forest"
+    }
+  },
+  "river": {
+    "description": "A river flows swiftly. You see fish and maybe danger lurking.",
+    "items": ["dagger", "coin"],
+    "exits": {
+      "west": "forest"
+    }
+  },
+  "bridge": {
+    "description": "A creaky wooden bridge over a chasm. It leads to a locked gate.",
+    "items": [],
+    "exits": {
+      "north": "forest",
+      "south": "locked_room"
+    }
+  },
+  "locked_room": {
+    "description": "You've entered a hidden chamber with glowing walls. A golden chest sits in the center.",
+    "locked": true,
+    "items": ["treasure"],
+    "exits": {
+      "west": "bridge"
+    }
+  }
+}

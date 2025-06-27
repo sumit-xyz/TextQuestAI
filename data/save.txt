@@ -1,0 +1,1 @@
+{"player": {"current_room": "cave", "inventory": [], "health": 80}, "enemy": {"name": "Bagh", "location": "river", "patrol_path": ["cave", "river", "forest"], "step": 1, "damage": 20}}

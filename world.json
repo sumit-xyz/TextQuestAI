@@ -1,58 +1,58 @@
 {
   "peak": {
-    "description": "You are standing on a snowy peak. The air is thin and cold.",
+    "description": "You are on the snowy peak of the mountain.",
     "exits": {"down": "mountain_pass"},
     "items": []
   },
   "mountain_pass": {
-    "description": "A narrow pass between steep mountains.",
+    "description": "You are on a narrow mountain pass. The wind whistles past.",
     "exits": {"up": "peak", "down": "cliffside"},
-    "items": []
+    "items": ["dagger"]
   },
   "cliffside": {
-    "description": "A precarious cliffside with a breathtaking view.",
+    "description": "A steep cliffside overlooking the forest below.",
     "exits": {"up": "mountain_pass", "down": "forest_center"},
-    "items": []
+    "items": ["health potion"]
   },
   "forest_center": {
-    "description": "A dense forest with tall trees all around.",
-    "exits": {"up": "cliffside", "west": "cave", "east": "river", "down": "village", "south": "bridge"},
-    "items": []
+    "description": "You are in the heart of a dense forest. Paths lead in many directions.",
+    "exits": {"up": "cliffside", "left": "cave", "right": "river", "down": "village"},
+    "items": ["stick", "health potion"]
   },
   "cave": {
-    "description": "A dark cave echoing with mysterious sounds.",
-    "exits": {"east": "forest_center"},
-    "items": []
+    "description": "A dark and ominous cave. You hear strange noises.",
+    "exits": {"right": "forest_center"},
+    "items": ["iron_shield"]
   },
   "river": {
-    "description": "A flowing river with clear, cold water.",
-    "exits": {"west": "forest_center", "east": "mill", "south": "forest_center"},
+    "description": "A flowing river with clear water.",
+    "exits": {"left": "forest_center", "down": "bridge"},
     "items": []
   },
+  "village": {
+    "description": "A small village with a few houses.",
+    "exits": {"up": "forest_center", "right": "bridge", "down": "blacksmith", "left": "mill"},
+    "items": ["wooden_shield"]
+  },
   "bridge": {
-    "description": "A wooden bridge crossing a deep gorge.",
-    "exits": {"north": "forest_center", "south": "locked_room"},
+    "description": "An old wooden bridge crossing the river.",
+    "exits": {"up": "river", "left": "village", "down": "locked_room"},
     "items": []
   },
   "locked_room": {
-    "description": "The treasure room, locked tight behind a heavy gate.",
-    "exits": {"north": "bridge"},
+    "description": "A mysterious locked room. You feel something valuable inside.",
+    "exits": {"up": "bridge", "down": "blacksmith"},
     "items": ["treasure"],
     "locked": true
   },
-  "village": {
-    "description": "A quiet village with a few humble houses.",
-    "exits": {"up": "forest_center", "down": "blacksmith"},
-    "items": []
-  },
   "blacksmith": {
-    "description": "The blacksmith's workshop, filled with the sound of hammer on anvil.",
-    "exits": {"up": "village"},
-    "items": []
+    "description": "The blacksmith's workshop, filled with tools and weapons.",
+    "exits": {"up": "locked_room", "up_left": "village"},
+    "items": ["sword"]
   },
   "mill": {
-    "description": "An old mill beside the river, creaking with the wind.",
-    "exits": {"west": "river"},
+    "description": "An old mill grinding grain.",
+    "exits": {"right": "village"},
     "items": []
   }
 }
